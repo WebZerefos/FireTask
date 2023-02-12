@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {CheckCircleIcon} from 'react-native-heroicons/outline';
 import {TrashIcon, MinusCircleIcon} from 'react-native-heroicons/solid';
 
-const ShoppingItem = () => {
+const ShoppingItem = ({item}) => {
   const [isChecked, setIsCheck] = useState(false);
 
   const onCheckedHandler = () => {
@@ -21,7 +21,7 @@ const ShoppingItem = () => {
       </Pressable>
       {/* shopping text */}
       <Text className="text-lg font-bold tracking-widest flex-1 text-slate-700 ml-3">
-        Bread
+        {item.name}
       </Text>
       {/* delete button */}
       <Pressable>
