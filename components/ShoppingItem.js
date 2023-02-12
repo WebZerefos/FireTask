@@ -1,30 +1,31 @@
 import {View, Text, Pressable} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import {CheckCircleIcon} from 'react-native-heroicons/outline';
 import {TrashIcon, MinusCircleIcon} from 'react-native-heroicons/solid';
+import moment from 'moment';
 
-const ShoppingItem = ({item}) => {
-  const [isChecked, setIsCheck] = useState(false);
-
-  const onCheckedHandler = () => {
-    setIsCheck(!isChecked);
-  };
+const ShoppingItem = ({item, onDelete, onUpdate}) => {
   return (
-    <View className="flex-row items-center bg-slate-300 p-2 w-[90%] self-center rounded-lg my-2">
+    <View className="flex-row items-center bg-slate-300 p-1 w-[90%] self-center rounded-lg my-2">
       {/* checked icon */}
-      <Pressable onPress={onCheckedHandler}>
-        {isChecked ? (
-          <MinusCircleIcon size={32} color="black" />
+      <Pressable onPress={onUpdate}>
+        {item.isChecked ? (
+          <MinusCircleIcon size={28} color="red" />
         ) : (
-          <CheckCircleIcon size={32} color="black" />
+          <CheckCircleIcon size={28} color="black" />
         )}
       </Pressable>
       {/* shopping text */}
-      <Text className="text-lg font-bold tracking-widest flex-1 text-slate-700 ml-3">
-        {item.name}
-      </Text>
+      <View className="flex-1">
+        <Text className="text-1xl font-bold tracking-widest  text-slate-700 ml-3">
+          {item.name}
+        </Text>
+        <Text className="text-xs font-bold tracking-widest  text-slate-400 ml-3">
+          {moment(item.created).format('DD/M/YY')}
+        </Text>
+      </View>
       {/* delete button */}
-      <Pressable>
+      <Pressable onPress={onDelete}>
         <TrashIcon size={24} color="black" />
       </Pressable>
     </View>
